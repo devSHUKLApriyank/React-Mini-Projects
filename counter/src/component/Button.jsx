@@ -1,12 +1,15 @@
-function Button(props) {
+import React from 'react'
+import { useState } from 'react'
 
-    console.log(props);
 
+const Button = ({ text, onClick, color }) => {
     return (
-        <button>
-            {props.text}
-        </button>
-    );
+        <div>
+            <button className={`${color} w-full text-white px-5 py-2 rounded-lg font-semibold transition-all `} onClick={onClick}>
+                {text}
+            </button>
+        </div>
+    )
 }
 
-export default Button;
+export default Button

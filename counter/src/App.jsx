@@ -1,15 +1,12 @@
-import Button from "./component/Button";
+import Button from "./component/Counter";
+import Counter from "./component/Counter";
 
 function App() {
   return (
-    <>
-    <h1>Counter App</h1>
-    <Button
-    text="+1"
-    color="green"
-    size="large"
-/>
-    </>
+
+    <Counter />
+
   );
   }
+
 export default App;
