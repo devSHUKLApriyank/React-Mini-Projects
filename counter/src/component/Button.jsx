@@ -1,9 +1,12 @@
-function Button({text, color, onClick}) {
-    return(
+function Button(props) {
+
+    console.log(props);
+
+    return (
         <button>
-            {text}{color}{onClick}
+            {props.text}
         </button>
-    )
+    );
 }
 
-export default Button
+export default Button;
