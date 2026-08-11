@@ -25,7 +25,7 @@ function App() {
         <div className="text-center mt-8">
 
           <h2 className="text-2xl font-semibold">
-            Lucknow
+            {city || "City Name"}
           </h2>
 
           <p className="text-6xl font-bold my-4">
