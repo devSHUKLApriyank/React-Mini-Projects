@@ -1,57 +1,48 @@
-import React, { useState } from 'react'
+import { useState } from "react";
 
 function App() {
 
-  const [city, setCity] = useState("")
+  const [city, setCity] = useState("");
+  const [weather, setWeather] = useState(null)
+
+  const searchWeather = async () => {
+    //ye fetch waali line ka mtlb h kii isse URL pe request bhejo aur response aane tak wait karo
+    const response = await fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=4344d713083072f384d0faab164fdc1e&units=metric`
+    );
+
+    const data = await response.json();//jo response mila h usko json mai convert karo
+
+    setWeather(data)
+  };
 
   return (
-    <div className='min-h-screen flex items-center justify-center'>
-      <div className="w-full max-w-md bg-white p-6 rounded-2xl shadow-lg">
-        <h1 className='text-3xl font-bold mb-6 text-center'>
-          Weather App
-        </h1>
-        <div className='flex gap-2'>
-          <input
-            type='text'
-            placeholder='Enter city name'
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-            className='flex-1 border rounded-lg px-4 py-2 outline-none'
-          />
-          <button className='bg-blue-500 text-white px-4 py-2 rounded-lg'>
-            Search
-          </button>
-        </div>
-        <div className="text-center mt-8">
+    <div>
 
-          <h2 className="text-2xl font-semibold">
-            {city || "City Name"}
-          </h2>
+      <input
+        value={city}
+        onChange={(e) => setCity(e.target.value)} placeholder="enter city name"
+      />
 
-          <p className="text-6xl font-bold my-4">
-            28°C
-          </p>
+      <button onClick={searchWeather}>
+        Search
+      </button>
+      <div>
+        <p>
+          <h2>{weather?.name}</h2>
 
-          <p className="text-xl text-gray-500">
-            Cloudy
-          </p>
+          <p>{weather?.main?.temp}°C</p>
 
-          <div className="flex justify-around mt-6">
-            <div>
-              <p className="text-gray-500">Humidity</p>
-              <p className="font-bold">72%</p>
-            </div>
+          <p>{weather?.weather?.[0]?.main}</p>
 
-            <div>
-              <p className="text-gray-500">Wind</p>
-              <p className="font-bold">12 km/h</p>
-            </div>
-          </div>
+          <p>{weather?.main?.humidity}%</p>
 
-        </div>
+          <p>{weather?.wind?.speed} km/h</p>
+        </p>
       </div>
+
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
