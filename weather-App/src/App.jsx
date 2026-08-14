@@ -10,9 +10,12 @@ function App() {
     const response = await fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=4344d713083072f384d0faab164fdc1e&units=metric`
     );
+    if (response.ok === false) {
+      console.error("City not found");
+      return;
+    }
 
     const data = await response.json();//jo response mila h usko json mai convert karo
-
     setWeather(data)
   };
 
