@@ -5,10 +5,12 @@ function App() {
   const [quote, setQuote] = useState();
   const [author, setAuthor] = useState();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false)
 
 
   const fetchQuote = async () => {
     setLoading(true);
+    setError(false);
 
     try {
       const response = await fetch("https://dummyjson.com/quotes/random");
@@ -18,13 +20,14 @@ function App() {
 
       setQuote(data.quote)
       setAuthor(data.author)
+
     } catch (error) {
+      setError(true);
+    } finally {
 
-    }finally{
       setLoading(false)
+
     }
-
-
   }
 
 
@@ -35,14 +38,16 @@ function App() {
         <h1 className="text-3xl font-bold mb-6">
           Random Quote Generator
         </h1>
+        <p>{quote}</p>
+         <p>{author}</p>
 
-        <p className="text-lg text-gray-700">
-          Click the button to get a random quote.
-        </p>
-
-        <button onClick={fetchQuote}  className="mt-6 px-6 py-3 bg-black text-white rounded-lg">
-         {loading ? "Loading..." : "New Quote"}
+        <button 
+        onClick={fetchQuote}
+        disabled={loading}
+         className="mt-6 px-6 py-3 bg-black text-white rounded-lg">
+          {loading ? "Loading..." : "New Quote"}
         </button>
+        <p>{error ? "Something went wrong" : ""}</p>
       </div>
     </div>
   );
