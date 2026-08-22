@@ -47,7 +47,7 @@ function App() {
          className="mt-6 px-6 py-3 bg-black text-white rounded-lg">
           {loading ? "Loading..." : "New Quote"}
         </button>
-        <p>{error ? "Something went wrong" : ""}</p>
+        <p>{error && "Something went wrong"}</p>
       </div>
     </div>
   );
